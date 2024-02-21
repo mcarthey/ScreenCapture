@@ -2,7 +2,7 @@
 
 namespace ScreenCapture.Services;
 
-public class ScreenCaptureServiceService : IScreenCaptureService
+public class ScreenCaptureService : IScreenCaptureService
 {
     public Bitmap CaptureScreen(Rectangle area)
     {
@@ -14,13 +14,18 @@ public class ScreenCaptureServiceService : IScreenCaptureService
         return screenBitmap;
     }
 
-    public Bitmap CaptureWindow(string windowTitle)
+    public Bitmap CaptureWindow(string windowTitle, out IntPtr windowHandle)
     {
-        nint windowHandle = User32.FindWindow(null, windowTitle);
+        Console.WriteLine($"Attempting to capture window: {windowTitle}");
+
+        windowHandle = User32.FindWindow(null, windowTitle);
         if (windowHandle == nint.Zero)
         {
+            Console.WriteLine($"Window not found: {windowTitle}");
             throw new Exception($"Window not found: {windowTitle}");
         }
+
+        Console.WriteLine($"Window found, handle: {windowHandle}");
 
         User32.RECT windowRect;
         User32.GetWindowRect(windowHandle, out windowRect);
@@ -33,6 +38,10 @@ public class ScreenCaptureServiceService : IScreenCaptureService
             graphics.CopyFromScreen(windowBounds.Location, Point.Empty, windowBounds.Size);
         }
 
+        Console.WriteLine($"Window captured successfully");
+
         return windowBitmap;
     }
+
+
 }

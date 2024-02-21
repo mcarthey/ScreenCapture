@@ -31,7 +31,6 @@ public class ImageMatcherService
 
                     // Find the minimum and maximum matching scores and their locations.
                     matchResult.MinMax(out minMatchValues, out maxMatchValues, out minMatchLocations, out maxMatchLocations);
-                    matchResult.Save("matchResult.png");
 
                     // If the maximum matching score is above a certain threshold, return the location of the maximum score.
                     // This location is the top-left corner of the area in the source image that best matches the target image.
@@ -55,6 +54,7 @@ public class ImageMatcherService
         return null;
     }
 
+    // TODO: testing a new method for searching but it's still a WIP
     public static Point? FindTargetInSourceOrb(Bitmap sourceBitmap, Bitmap targetBitmap)
     {
         // Convert the source and target bitmaps to Image<Gray, byte> objects.

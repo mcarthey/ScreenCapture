@@ -2,5 +2,5 @@
 
 public interface IMouseSimulatorService
 {
-    void SimulateClick(int x, int y);
+    void SimulateClick(int x, int y, IntPtr windowHandle);
 }

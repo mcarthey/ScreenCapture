@@ -28,7 +28,7 @@ namespace ScreenCapture.Tests
             program.CaptureAndCheckColor(captureArea, color, clickOffsetX, clickOffsetY);
 
             // Assert
-            mockMouseSimulator.Verify(m => m.SimulateClick(captureArea.X + clickOffsetX, captureArea.Y + clickOffsetY), Times.Once);
+            mockMouseSimulator.Verify(m => m.SimulateClick(captureArea.X + clickOffsetX, captureArea.Y + clickOffsetY, It.IsAny<IntPtr>()), Times.Once);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace ScreenCapture.Tests
             program.CaptureAndCheckColor(captureArea, color, clickOffsetX, clickOffsetY);
 
             // Assert
-            mockMouseSimulator.Verify(m => m.SimulateClick(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+            mockMouseSimulator.Verify(m => m.SimulateClick(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<IntPtr>()), Times.Never);
         }
 
         // Additional tests for CaptureWindowAndCheckColor can be added here.
