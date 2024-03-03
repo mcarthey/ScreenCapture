@@ -25,7 +25,7 @@ public class ScreenCaptureService : IScreenCaptureService
             throw new Exception($"Window not found: {windowTitle}");
         }
 
-        Console.WriteLine($"Window found, handle: {windowHandle}");
+        Console.WriteLine($"Window found, handle: {windowHandle:x8}");
 
         User32.RECT windowRect;
         User32.GetWindowRect(windowHandle, out windowRect);

@@ -9,13 +9,15 @@ namespace ScreenCapture
         private readonly IScreenCaptureService _screenCaptureService;
         private readonly IColorCheckerService _colorCheckerService;
         private readonly IMouseSimulatorService _mouseSimulatorService;
+        private readonly IClickSimulatorService _clickSimulatorService;
         private IntPtr _windowHandle;
 
-        public ScreenCaptureProgram(IScreenCaptureService screenCaptureService, IColorCheckerService colorCheckerService, IMouseSimulatorService mouseSimulatorService)
+        public ScreenCaptureProgram(IScreenCaptureService screenCaptureService, IColorCheckerService colorCheckerService, IMouseSimulatorService mouseSimulatorService, IClickSimulatorService clickSimulatorService)
         {
             _screenCaptureService = screenCaptureService;
             _colorCheckerService = colorCheckerService;
             _mouseSimulatorService = mouseSimulatorService;
+            _clickSimulatorService = clickSimulatorService;
         }
 
 
@@ -24,12 +26,9 @@ namespace ScreenCapture
             ScreenCaptureService screenCapture = new ScreenCaptureService();
             ColorCheckerService colorCheckerService = new ColorCheckerService();
             MouseSimulatorService mouseSimulatorService = new MouseSimulatorService();
+            ClickSimulatorService clickSimulatorService = new ClickSimulatorService();
 
-            ScreenCaptureProgram program = new ScreenCaptureProgram(screenCapture, colorCheckerService, mouseSimulatorService);
-
-            //Rectangle captureArea = new Rectangle(100, 100, 200, 200);
-            //program.CaptureAndCheckColor(captureArea, Color.FromArgb(255, 0, 0), 50, 50);
-            //program.CaptureWindowAndCheckColor("Untitled - Paint", Color.FromArgb(255, 0, 0), 50, 50);
+            ScreenCaptureProgram program = new ScreenCaptureProgram(screenCapture, colorCheckerService, mouseSimulatorService, clickSimulatorService);
          
             Bitmap targetImage = new Bitmap("Images/target.bmp");
 
@@ -79,7 +78,8 @@ namespace ScreenCapture
                 Point? location = ImageMatcherService.FindTargetInSource(bitmap, targetImage);
                 if (location.HasValue)
                 {
-                    _mouseSimulatorService.SimulateClick(location.Value.X + clickOffsetX, location.Value.Y + clickOffsetY, _windowHandle);
+                    _clickSimulatorService.SimulateClick(location.Value.X + clickOffsetX, location.Value.Y + clickOffsetY, _windowHandle);
+                    //_mouseSimulatorService.SimulateClick(location.Value.X + clickOffsetX, location.Value.Y + clickOffsetY, _windowHandle);
                 }
             }
         }

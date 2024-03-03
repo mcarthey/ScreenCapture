@@ -36,4 +36,5 @@ public class MouseSimulatorService : IMouseSimulatorService
         inputSimulator.Mouse.MoveMouseTo(normalizedX, normalizedY);
         inputSimulator.Mouse.LeftButtonClick();
     }
+
 }
