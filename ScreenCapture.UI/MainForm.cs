@@ -6,6 +6,7 @@ namespace ScreenCapture.UI
         private PictureBox pictureBox;
         private Label lblClickCount;
         private Label lblMousePosition;
+        private Label lblPictureBoxMousePosition;
         private int clickCount = 0;
         private int redBoxClickCount = 0;
 
@@ -24,6 +25,7 @@ namespace ScreenCapture.UI
             this.pictureBox = new PictureBox();
             this.lblClickCount = new Label();
             this.lblMousePosition = new Label();
+            this.lblPictureBoxMousePosition = new Label();
 
             // Button
             this.btnTest.Location = new Point(10, 10);
@@ -37,16 +39,22 @@ namespace ScreenCapture.UI
             this.pictureBox.BackColor = Color.White;
             this.pictureBox.Paint += new PaintEventHandler(this.pictureBox_Paint);
             this.pictureBox.Click += new EventHandler(this.pictureBox_Click);
+            this.pictureBox.MouseMove += new MouseEventHandler(this.PbForm_MouseMove); // Add this line
 
             // Label
             this.lblClickCount.Location = new Point(10, 160);
-            this.lblClickCount.Size = new Size(100, 30);
+            this.lblClickCount.Size = new Size(100, 20);
             this.lblClickCount.Text = "Clicks: 0";
 
             // Mouse Position
-            this.lblMousePosition.Location = new Point(10, 190);
+            this.lblMousePosition.Location = new Point(10, 180);
             this.lblMousePosition.Size = new Size(100, 20);
             this.lblMousePosition.Text = "Coord: 0, 0";
+
+            // PictureBox Position
+            this.lblPictureBoxMousePosition.Location = new Point(10, 200);
+            this.lblPictureBoxMousePosition.Size = new Size(100, 20);
+            this.lblPictureBoxMousePosition.Text = "PB Coord: 0, 0";
 
             // Form
             this.ClientSize = new Size(200, 220);
@@ -54,6 +62,7 @@ namespace ScreenCapture.UI
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.lblClickCount);
             this.Controls.Add(this.lblMousePosition);
+            this.Controls.Add(this.lblPictureBoxMousePosition);
         }
 
         private void btnTest_Click(object sender, EventArgs e)
@@ -99,6 +108,15 @@ namespace ScreenCapture.UI
         {
             // Display the coordinates in the lblMousePosition label
             lblMousePosition.Text = $"Coord: {e.X}, {e.Y}";
+        }
+
+        private void PbForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Convert the mouse position to be relative to the PictureBox
+            Point pictureBoxCoord = pictureBox.PointToClient(Cursor.Position);
+
+            // Add another label to display the PictureBox coordinates
+            lblPictureBoxMousePosition.Text = $"PB Coord: {pictureBoxCoord.X}, {pictureBoxCoord.Y}";
         }
 
         /// <summary>

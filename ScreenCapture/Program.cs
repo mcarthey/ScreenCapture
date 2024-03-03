@@ -26,7 +26,10 @@ namespace ScreenCapture
             ScreenCaptureService screenCapture = new ScreenCaptureService();
             ColorCheckerService colorCheckerService = new ColorCheckerService();
             MouseSimulatorService mouseSimulatorService = new MouseSimulatorService();
-            ClickSimulatorService clickSimulatorService = new ClickSimulatorService();
+            IClickIndicatorService clickIndicatorService = new ClickOverlayIndicatorService();
+            ClickSimulatorService clickSimulatorService = new ClickSimulatorService(clickIndicatorService);
+
+            // Use clickSimulatorService to simulate clicks...
 
             ScreenCaptureProgram program = new ScreenCaptureProgram(screenCapture, colorCheckerService, mouseSimulatorService, clickSimulatorService);
          
