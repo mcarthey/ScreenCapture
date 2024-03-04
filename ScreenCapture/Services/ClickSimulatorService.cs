@@ -25,11 +25,10 @@ namespace ScreenCapture.Services
         [DllImport("user32.dll")]
         public static extern bool ClientToScreen(IntPtr hWnd, ref Point lpPoint);
 
-
-        const int SM_CYCAPTION = 4;
-        const uint WM_LBUTTONDOWN = 0x0201;
-        const uint WM_LBUTTONUP = 0x0202;
-        const uint MK_LBUTTON = 0x0001;
+        public const int SM_CYCAPTION = 4;
+        public const uint MK_LBUTTON = 0x0001;
+        public const uint WM_LBUTTONDOWN = 0x0201;
+        public const uint WM_LBUTTONUP = 0x0202;
 
         private readonly IClickIndicatorService _clickIndicatorService;
 
@@ -58,6 +57,15 @@ namespace ScreenCapture.Services
             IntPtr handleAtLocation = ChildWindowFromPoint(windowHandle, new Point(x, y));
             Console.WriteLine($"Handle at location ({x}, {y}): {handleAtLocation:x}");
 
+            if (handleAtLocation != windowHandle)
+            {
+                Console.WriteLine($"Click will be sent to a child window with handle {handleAtLocation:x}");
+            }
+            else
+            {
+                Console.WriteLine($"Click will be sent to the main window");
+            }
+
             // Convert the main window coordinates to screen coordinates
             Point screenPoint = new Point(x, y);
             ClientToScreen(windowHandle, ref screenPoint);
@@ -65,15 +73,6 @@ namespace ScreenCapture.Services
             // Convert the screen coordinates to the client-area coordinates of the child control
             Point childControlPoint = new Point(screenPoint.X, screenPoint.Y);
             ScreenToClient(handleAtLocation, ref childControlPoint);
-
-            if (handleAtLocation != windowHandle)
-            {
-                Console.WriteLine($"Click will be sent to a child window with handle {handleAtLocation:x} X:{screenPoint.X} Y:{screenPoint.Y}");
-            }
-            else
-            {
-                Console.WriteLine($"Click will be sent to the main window");
-            }
 
             // Convert the coordinates to the LPARAM format
             IntPtr lParam = (IntPtr)((childControlPoint.Y << 16) | childControlPoint.X);
