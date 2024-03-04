@@ -27,6 +27,7 @@ namespace ScreenCapture.UI
             this.lblClickCount = new Label();
             this.lblMousePosition = new Label();
             this.lblPictureBoxMousePosition = new Label();
+            this.txtLog = new TextBox();
 
             // Button
             this.btnTest.Location = new Point(10, 10);
@@ -58,11 +59,9 @@ namespace ScreenCapture.UI
             this.lblPictureBoxMousePosition.Text = "PB Coord: 0, 0";
 
             // TextBox
-            this.txtLog = new TextBox();
             this.txtLog.Location = new Point(10, 220);
             this.txtLog.Size = new Size(180, 100);
             this.txtLog.Multiline = true;
-            this.Controls.Add(this.txtLog);
 
             // Form
             this.ClientSize = new Size(200, 330);
