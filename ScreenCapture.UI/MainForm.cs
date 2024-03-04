@@ -22,81 +22,56 @@ namespace ScreenCapture.UI
 
         private void InitializeComponent()
         {
-            btnTest = new Button();
-            pictureBox = new PictureBox();
-            lblClickCount = new Label();
-            lblMousePosition = new Label();
-            lblPictureBoxMousePosition = new Label();
-            txtLog = new TextBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
-            SuspendLayout();
-            // 
-            // btnTest
-            // 
-            btnTest.Location = new Point(10, 10);
-            btnTest.Name = "btnTest";
-            btnTest.Size = new Size(100, 30);
-            btnTest.TabIndex = 1;
-            btnTest.Text = "Click Me";
-            btnTest.Click += btnTest_Click;
-            // 
-            // pictureBox
-            // 
-            pictureBox.BackColor = Color.White;
-            pictureBox.Location = new Point(10, 50);
-            pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(100, 100);
-            pictureBox.TabIndex = 2;
-            pictureBox.TabStop = false;
-            pictureBox.Click += pictureBox_Click;
-            pictureBox.Paint += pictureBox_Paint;
-            pictureBox.MouseMove += PbForm_MouseMove;
-            // 
-            // lblClickCount
-            // 
-            lblClickCount.Location = new Point(10, 160);
-            lblClickCount.Name = "lblClickCount";
-            lblClickCount.Size = new Size(100, 20);
-            lblClickCount.TabIndex = 3;
-            lblClickCount.Text = "Clicks: 0";
-            // 
-            // lblMousePosition
-            // 
-            lblMousePosition.Location = new Point(10, 180);
-            lblMousePosition.Name = "lblMousePosition";
-            lblMousePosition.Size = new Size(100, 20);
-            lblMousePosition.TabIndex = 4;
-            lblMousePosition.Text = "Coord: 0, 0";
-            // 
-            // lblPictureBoxMousePosition
-            // 
-            lblPictureBoxMousePosition.Location = new Point(10, 200);
-            lblPictureBoxMousePosition.Name = "lblPictureBoxMousePosition";
-            lblPictureBoxMousePosition.Size = new Size(100, 20);
-            lblPictureBoxMousePosition.TabIndex = 5;
-            lblPictureBoxMousePosition.Text = "PB Coord: 0, 0";
-            // 
-            // txtLog
-            // 
-            txtLog.Location = new Point(10, 220);
-            txtLog.Multiline = true;
-            txtLog.Name = "txtLog";
-            txtLog.Size = new Size(180, 100);
-            txtLog.TabIndex = 0;
-            // 
-            // MainForm
-            // 
-            ClientSize = new Size(200, 332);
-            Controls.Add(btnTest);
-            Controls.Add(pictureBox);
-            Controls.Add(lblClickCount);
-            Controls.Add(lblMousePosition);
-            Controls.Add(lblPictureBoxMousePosition);
-            Controls.Add(txtLog);
-            Name = "MainForm";
-            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.btnTest = new Button();
+            this.pictureBox = new PictureBox();
+            this.lblClickCount = new Label();
+            this.lblMousePosition = new Label();
+            this.lblPictureBoxMousePosition = new Label();
+
+            // Button
+            this.btnTest.Location = new Point(10, 10);
+            this.btnTest.Size = new Size(100, 30);
+            this.btnTest.Text = "Click Me";
+            this.btnTest.Click += new EventHandler(this.btnTest_Click);
+
+            // PictureBox
+            this.pictureBox.Location = new Point(10, 50);
+            this.pictureBox.Size = new Size(100, 100);
+            this.pictureBox.BackColor = Color.White;
+            this.pictureBox.Paint += new PaintEventHandler(this.pictureBox_Paint);
+            this.pictureBox.Click += new EventHandler(this.pictureBox_Click);
+            this.pictureBox.MouseMove += new MouseEventHandler(this.PbForm_MouseMove); // Add this line
+
+            // Label
+            this.lblClickCount.Location = new Point(10, 160);
+            this.lblClickCount.Size = new Size(100, 20);
+            this.lblClickCount.Text = "Clicks: 0";
+
+            // Mouse Position
+            this.lblMousePosition.Location = new Point(10, 180);
+            this.lblMousePosition.Size = new Size(100, 20);
+            this.lblMousePosition.Text = "Coord: 0, 0";
+
+            // PictureBox Position
+            this.lblPictureBoxMousePosition.Location = new Point(10, 200);
+            this.lblPictureBoxMousePosition.Size = new Size(100, 20);
+            this.lblPictureBoxMousePosition.Text = "PB Coord: 0, 0";
+
+            // TextBox
+            this.txtLog = new TextBox();
+            this.txtLog.Location = new Point(10, 220);
+            this.txtLog.Size = new Size(180, 100);
+            this.txtLog.Multiline = true;
+            this.Controls.Add(this.txtLog);
+
+            // Form
+            this.ClientSize = new Size(200, 330);
+            this.Controls.Add(this.btnTest);
+            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.lblClickCount);
+            this.Controls.Add(this.lblMousePosition);
+            this.Controls.Add(this.lblPictureBoxMousePosition);
+            this.Controls.Add(this.txtLog);
         }
 
         private void btnTest_Click(object sender, EventArgs e)
